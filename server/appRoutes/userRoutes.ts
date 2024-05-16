@@ -11,7 +11,9 @@ router.get("/users", async (req: Request, res: Response) => {
     const users = await UserModel.find({});
     res.send(users);
   } catch (error) {
-    res.status(500).json({ error: `error in /users route get request ${error}` });
+    res
+      .status(500)
+      .json({ error: `error in /users route get request ${error}` });
   }
 });
 
@@ -24,15 +26,15 @@ router.post("/register", async (req: Request, res: Response) => {
     await user.save();
     res.send({ user, success: true });
   } catch (error) {
-    res.status(500).json({ error: `error in /register route post request ${error}` });
+    res
+      .status(500)
+      .json({ error: `error in /register route post request ${error}` });
   }
 });
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    const values = req.body;
-    console.log("values", values);
 
     const user = await UserModel.findOne({ email });
     console.log("user", user);
@@ -54,9 +56,11 @@ router.post("/login", async (req: Request, res: Response) => {
     });
     console.log("token", token);
 
-    res.send({ success: true });
+    res.send({ success: true, token });
   } catch (error) {
-    res.status(500).json({ error: `error in /login route post request ${error}` });
+    res
+      .status(500)
+      .json({ error: `error in /login route post request ${error}` });
   }
 });
 
