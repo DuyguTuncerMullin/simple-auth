@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register: React.FC = () => {
   const [name, setName] = useState("");
@@ -28,7 +29,7 @@ const Register: React.FC = () => {
     });
     console.log("data", data);
     if (data.success) {
-      navigate("/api/welcome");
+      navigate("/api/login");
     }
   };
 
@@ -36,6 +37,7 @@ const Register: React.FC = () => {
     <div>
       <div>
         <h1>Register Info</h1>
+
         <form onSubmit={submitHandler}>
           <input
             type="text"
@@ -60,6 +62,10 @@ const Register: React.FC = () => {
           ></input>
           <button type="submit">Submit</button>
         </form>
+        <h6>
+          If you are already a member, please{" "}
+          <Link to="/api/login">log in</Link>
+        </h6>
       </div>
     </div>
   );

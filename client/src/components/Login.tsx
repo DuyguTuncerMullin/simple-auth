@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -24,9 +25,9 @@ const Login: React.FC = () => {
     });
     console.log("data:", data);
     if (data.success) {
-        navigate("/api/welcome");
-      }
-
+      localStorage.setItem("token", data.token);
+      navigate("/api/welcome");
+    }
   };
 
   return (
@@ -50,6 +51,10 @@ const Login: React.FC = () => {
           ></input>
           <button type="submit">Submit</button>
         </form>
+        <h6>
+          If you are not a member yet, please{" "}
+          <Link to="/api/register">register</Link>
+        </h6>
       </div>
     </div>
   );
